@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <div class="container">
+                <p>Movie <span>Hub.</span></p>
+                <a href="watchlist.html" class="go-watchlist-btn">📽️ Go to Watchlist</a>
+
+            </div>
+        </div>
+        <div class="search-container">
+            <div class="search-element">
+                <h3>Search Movie:</h3>
+                <input type="text" class="Form-control" placeholder="search Movie Title..." id="movie-search-box" onkeyup="debounce(findmovies, 500)"
+ onclick="findmovies()">
+                <div class="search-list" id="search-list">
+                    <!-- <div class="search-list-item">
+                        <div class="search-item-thumbnail">
+                            <img src="assets/image.png" alt="">
+                        </div>
+                        <div class="search-item-info">
+                            <h3>Annabelle Creation</h3>
+                            <p>2017</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="result-container">
+                <div class="result-grid" id="result-grid">
+                    <!-- <div class="movie-poster">
+                        <img src="assets/image.png" alt="movie-poster">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title"> Annabelle Creation</h3>
+                        <ul class="movie-misc-info">
+                            <li class="year">2017</li>
+                            <li class="rating">Ratings:4.3</li>
+                            <li class="released">Released:18 August 2017</li>
+                        </ul>
+                        <p class="genre"><b>Genre: </b>Horror,Mystery</p>
+                        <p class="writer"><b>Writer: </b>David F. Sandberg,Gary Dauberman,James Wan,Maxime
+                            Alexander,Anthony LaPaglia,Lotta Losten</p>
+                        <p class="actors"><b>Actors: </b>Talitha Bateman,Lulu Wilson,Stephanie Sigman,Miranda Otto</p>
+                        <p class="plot"><b>Plot: </b>former toy maker Sam Mullins and his wife,Esther,are happy to
+                            welcome a nun and six orphaned girls into their california farmhouse.years earlier,the
+                            couple's 7-year-old daughter annabelle died in a targic car accident.Terror soon strikes
+                            when one child sneaks into a forbidden room and find a seemingly innocent doll that appears
+                            to have a life of its own.</p>
+                        <p class="language"><b>Language: </b>English</p>
+                        <p class="award"><b><i class="fas fa-award"></i></b>It won 1 IHorror award</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

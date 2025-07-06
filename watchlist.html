@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Watchlist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="logo">
+            <div class="container">
+                <p>Movie <span>Watchlist</span></p>
+                <a href="index.html" class="back-btn">◀ Back to Search</a>
+            </div>
+        </div>
+
+        <div class="container result-container">
+            <div class="result-grid" id="watchlist-grid"></div>
+            <div id="movie-details"></div>
+        </div>
+
+    </div>
+
+    <script>
+        const watchlistContainer = document.getElementById('watchlist-grid');
+        let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+
+        function renderWatchlist() {
+            watchlistContainer.innerHTML = "";
+            if (watchlist.length === 0) {
+                watchlistContainer.innerHTML = "<p style='color:white;'>No movies in your watchlist.</p>";
+                return;
+            }
+
+            watchlist.forEach((movie, index) => {
+                const poster = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/100x150?text=No+Image";
+                watchlistContainer.innerHTML += `
+                     <div class="movie-card" style="color: white;" onclick="showDetails('${movie.imdbID}')">
+                        <img src="${poster}" alt="${movie.Title}" style="max-width:150px;">
+                        <h3>${movie.Title}</h3>
+                        <p>Year: ${movie.Year}</p>
+                        <button onclick="event.stopPropagation(); removeFromWatchlist(${index})"> Remove</button>
+                     </div>
+                         `;
+            });
+
+        }
+        function showDetails(imdbID) {
+            fetch(`https://omdbapi.com/?i=${imdbID}&apikey=fc1fef96`)
+                .then(res => res.json())
+                .then(movie => {
+                    const detailsDiv = document.getElementById('movie-details');
+                    const poster = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/100x150?text=No+Image";
+                    detailsDiv.innerHTML = `
+                <div class="watchlist-details-container">
+                       <div class="movie-poster">
+                           <img src="${poster}" alt="${movie.Title}">
+                        </div>
+                   <div class="movie-info" style="color:white;">
+                   <h3 class="movie-title">${movie.Title}</h3>
+                <ul class="movie-misc-info">
+                    <li class="year">${movie.Year}</li>
+                    <li class="rating">${movie.Rated}</li>
+                    <li class="released">${movie.Released}</li>
+                </ul>
+                <p class="genre"><b>Genre: </b>${movie.Genre}</p>
+                <p class="writer"><b>Writer: </b>${movie.Writer}</p>
+                <p class="actors"><b>Actors: </b>${movie.Actors}</p>
+                <p class="plot"><b>Plot: </b>${movie.Plot}</p>
+                <p class="language"><b>Language: </b>${movie.Language}</p>
+                <p class="award"><b><i class="fas fa-award"></i></b> ${movie.Awards}</p>
+                </div>
+            </div>
+      `;
+                });
+        }
+
+
+
+
+        function removeFromWatchlist(index) {
+            watchlist.splice(index, 1);
+            localStorage.setItem("watchlist", JSON.stringify(watchlist));
+            renderWatchlist();
+        }
+
+        renderWatchlist();
+    </script>
+</body>
+
+</html>
